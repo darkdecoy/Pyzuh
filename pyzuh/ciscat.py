@@ -1,7 +1,7 @@
 import requests
 import jwt
 import json
-from errors import handle_errors
+from .errors import handle_errors
 
 class Ciscat: 
     def __init__(self, api_url: str, jwt_token: str):

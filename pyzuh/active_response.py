@@ -1,6 +1,6 @@
 import requests
 import json
-from errors import handle_errors
+from .errors import handle_errors
 
 class ActiveResponse:
     def __init__(self, api_url: str, jwt_token: str):

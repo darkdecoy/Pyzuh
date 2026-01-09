@@ -1,5 +1,5 @@
 import requests
-from errors import handle_errors
+from .errors import handle_errors
 import jwt 
 
 class Decoders: 

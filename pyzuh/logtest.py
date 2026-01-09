@@ -1,5 +1,5 @@
 import requests
-from errors import handle_errors
+from .errors import handle_errors
 
 class Logtest:
     def __init__(self, api_url: str, jwt_token: str):
