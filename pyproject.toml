@@ -1,17 +1,20 @@
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[tool.poetry]
+[project]
 name = "pyzuh"
 version = "1.0.0"
-description = "Python Library for the Wazuh API"
-authors = ["austin@liliumsecurity.com"]
-license = "MIT"
-homepage = "https://github.com/Lilium48/pyzuh"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Dark Decoy", email = "darkdecoy@notracking.space" }
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.31.0",
+    "pyjwt>=2.8.0",
+    "urllib3>=2.2.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.6"
-requests = ">=2.31.0"
-pyjwt = ">=2.8.0"
-urllib3 = ">=2.2.0"
+[build-system]
+requires = ["uv_build>=0.9.5,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.workspace]

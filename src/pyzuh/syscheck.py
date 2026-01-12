@@ -1,14 +1,14 @@
 import requests
 from .errors import handle_errors
 
-class Rootcheck: 
+class Syscheck: 
     def __init__(self, api_url: str, jwt_token: str):
         self.api_url = api_url
         self.jwt_token = jwt_token
     
-    def run_scan(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list = None) -> dict:
+    def run_sysscan(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list = None) -> dict:
         """
-        Send a PUT request to the run scan API to run a rootcheck scan.
+        Send a PUT request to the sysscan API to run a rootcheck scan.
 
         Parameters:
         pretty (bool, optional): Whether to return the response in a human-readable format. Defaults to False.
@@ -19,7 +19,7 @@ class Rootcheck:
         dict: The API response as a dictionary.
         """
         # Define the endpoint URL
-        endpoint = f"{self.api_url}/rootcheck"
+        endpoint = f"{self.api_url}/syscheck"
     
         # Create headers
         headers = {
@@ -46,9 +46,9 @@ class Rootcheck:
         # Parse and return the JSON response
         return response.json()
 
-    def get_rootcheck_results(self, agent_id: str, pretty: bool = False, wait_for_complete: bool = False, offset: int = 0, limit: int = 500, sort: str = None, search: str = None, select: list = None, q: str = None, distinct: bool = False, status: str = None, pci_dss: str = None, cis: str = None) -> dict:
+    def get_syscheck_results(self, agent_id: str, pretty: bool = False, wait_for_complete: bool = False, offset: int = 0, limit: int = 500, sort: str = None, search: str = None, select: list = None, q: str = None, distinct: bool = False, status: str = None, pci_dss: str = None, cis: str = None) -> dict:
         """
-        Send a GET request to the Rootcheck API to retrieve the rootcheck database of an agent.
+        Send a GET request to the syscheck API to retrieve the rootcheck database of an agent.
 
         Parameters:
         agent_id (str): The ID of the agent whose rootcheck database is to be retrieved.
@@ -69,7 +69,7 @@ class Rootcheck:
         dict: The API response as a dictionary.
         """
         # Define the endpoint URL
-        endpoint = f"{self.api_url}/rootcheck/{agent_id}"
+        endpoint = f"{self.api_url}/syscheck/{agent_id}"
     
         # Create headers
         headers = {
@@ -105,9 +105,9 @@ class Rootcheck:
         # Parse and return the JSON response
         return response.json()
 
-    def clear_results(self, pretty: bool = False, wait_for_complete: bool = False, agent_id = str >= 3) -> dict:
+    def clear_sysresults(self, pretty: bool = False, wait_for_complete: bool = False, agent_id = str) -> dict:
         """
-        Send a PUT request to the Rootcheck API to run a rootcheck scan.
+        Send a PUT request to the sysresults api to run a rootcheck scan.
 
         Parameters:
         pretty (bool, optional): Whether to return the response in a human-readable format. Defaults to False.
@@ -123,7 +123,7 @@ class Rootcheck:
             raise ValueError("Agent ID must be at least 3 characters long.")
 
         # Define the endpoint URL
-        endpoint = f"{self.api_url}/rootcheck/{agent_id}"
+        endpoint = f"{self.api_url}/syscheck/{agent_id}"
     
         # Create headers
         headers = {
@@ -146,9 +146,9 @@ class Rootcheck:
         # Parse and return the JSON response
         return response.json()
 
-    def get_lastscan(self, pretty: bool = False, wait_for_complete: bool = False, agent_id = str >= 3) -> dict:
+    def get_last_sysscan(self, pretty: bool = False, wait_for_complete: bool = False, agent_id = str) -> dict:
         """
-        Send a PUT request to the syscheck API to run a rootcheck scan and return the last scan.
+        Send a PUT request to the Syscheck API to run a rootcheck scan.
 
         Parameters:
         pretty (bool, optional): Whether to return the response in a human-readable format. Defaults to False.
@@ -164,7 +164,7 @@ class Rootcheck:
             raise ValueError("Agent ID must be at least 3 characters long.")
 
         # Define the endpoint URL
-        endpoint = f"{self.api_url}/rootcheck/{agent_id}"
+        endpoint = f"{self.api_url}/syscheck/{agent_id}"
     
         # Create headers
         headers = {
