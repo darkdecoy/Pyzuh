@@ -121,28 +121,46 @@ class Agents:
         params = {
         "pretty": str(pretty).lower(),
         "wait_for_complete": str(wait_for_complete).lower(),
-        "agents_list": agents_list,
         "offset": offset,
         "limit": limit,
-        "select": ','.join(select),
-        "sort": sort,
-        "search": search,
-        "status": ','.join(status),
         "q": q,
-        "older_than": older_than,
-        "os.platform": os_platform,
-        "os.version": os_version,
-        "os.name": os_name,
-        "manager": manager,
-        "version": version,
-        "group": group,
-        "node_name": node_name,
-        "name": name,
-        "ip": ip,
-        "registerIP": register_ip,
-        "group_config_status": group_config_status,
         "distinct": str(distinct).lower()
         }
+
+        if older_than != "":
+            params.update({"older_than": older_than})
+        if os_platform != "":
+            params.update({"os.platform": os_platform})
+        if os_version != "":
+            params.update({"os.version": os_version})
+        if os_name != "":
+            params.update({"os.name": os_name})
+        if manager != "":
+            params.update({"manager": manager})
+        if version != "":
+            params.update({"version": version})
+        if group != "":
+            params.update({"group": group})
+        if node_name != "":
+            params.update({"node_name": node_name})
+        if name != "":
+            params.update({"name": name})
+        if ip != "":
+            params.update({"ip": ip})
+        if register_ip != "":
+            params.update({"registerIP": register_ip})
+        if group_config_status != "":
+            params.update({"group_config_status": group_config_status})
+        if agents_list != "":
+            params.update({"agents_list": agents_list})
+        if select != []:
+            params.update({"select": ','.join(select)})
+        if status != []:
+            params.update({"status": ','.join(status)})
+        if sort != "":
+            params.update({"sort": sort})
+        if search != "":
+            params.update({"search": search})
 
         # Send a GET request to the endpoint with the query parameters
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
