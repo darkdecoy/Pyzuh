@@ -1,10 +1,11 @@
 import requests 
 from .errors import handle_errors
 
-class Groups: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Groups:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def delete_groups(self, pretty: bool = False, wait_for_complete: bool = False, groups_list: list = None) -> dict:
         """
@@ -34,7 +35,7 @@ class Groups:
         }
 
         # Send a Delete request to the endpoint with the events as a JSON payload
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -99,7 +100,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -142,7 +143,7 @@ class Groups:
         }
 
         # Send a POST request to the API endpoint with the group_id in the request body
-        response = requests.post(endpoint, headers=headers, params=params, json=body)
+        response = requests.post(endpoint, headers=headers, params=params, json=body, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -200,7 +201,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -246,7 +247,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -285,7 +286,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a PUT request to the endpoint
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -347,7 +348,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -388,7 +389,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -426,7 +427,7 @@ class Groups:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

@@ -2,9 +2,10 @@ import requests
 from .errors import handle_errors
 
 class Experimental:
-    def __init__(self, api_url: str, jwt_token: str):
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def clear_rootcheck_results(self, pretty: bool = False, agents_list: str = None, wait_for_complete: bool = False) -> dict:
         """
@@ -35,7 +36,7 @@ class Experimental:
         }
 
         # Send a DELETE request to the endpoint
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -72,7 +73,7 @@ class Experimental:
         }
 
         # Send a DELETE request to the endpoint
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -141,7 +142,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -205,7 +206,7 @@ class Experimental:
 
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -285,7 +286,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -343,7 +344,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
         
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -404,7 +405,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -467,7 +468,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         self.handle_errors(response)
@@ -531,7 +532,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -602,7 +603,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -685,7 +686,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -736,7 +737,7 @@ class Experimental:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()

@@ -1,10 +1,12 @@
 import requests
 from .errors import handle_errors
 
-class Sca: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Sca:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
+
     def get_sca_results(self, agent_id: str, pretty: bool = False, wait_for_complete: bool = False, name: str = None, description: str = None, references: str = None, offset: int = 0, limit: int = 500, sort: str = None, search: str = None, select: list = None, q: str = None, distinct: bool = False) -> dict:
         """
         Return the security SCA database of an agent.
@@ -56,7 +58,7 @@ class Sca:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -136,7 +138,7 @@ class Sca:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

@@ -3,10 +3,11 @@ import jwt
 import json
 from .errors import handle_errors
 
-class Ciscat: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Ciscat:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def get_results(self, agent_id: str, pretty: bool = False, wait_for_complete: bool = False, 
                     offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
@@ -71,7 +72,7 @@ class Ciscat:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors
         handle_errors(response)

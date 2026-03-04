@@ -2,9 +2,10 @@ import requests
 from .errors import handle_errors
 
 class Cluster:
-    def __init__(self, api_url: str, jwt_token: str):
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def get_local_node(self, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -33,7 +34,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -94,7 +95,7 @@ class Cluster:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Make the GET request
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors
         handle_errors(response)
@@ -131,7 +132,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -168,7 +169,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -203,7 +204,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -238,7 +239,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -275,7 +276,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -311,7 +312,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -347,7 +348,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -400,7 +401,7 @@ class Cluster:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -428,16 +429,16 @@ class Cluster:
         headers = {
             "Authorization": f"Bearer {self.jwt_token}",
             "Content-Type": "application/octet-stream"
-         }
+        }
 
         # Prepare query parameters
         params = {
-          "pretty": str(pretty).lower(),
-          "wait_for_complete": str(wait_for_complete).lower()
-          }
+            "pretty": str(pretty).lower(),
+            "wait_for_complete": str(wait_for_complete).lower()
+        }
 
         # Send a PUT request to the endpoint with the request body (config_data)
-        response = requests.put(endpoint, headers=headers, params=params, data=config_data)
+        response = requests.put(endpoint, headers=headers, params=params, data=config_data, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -479,7 +480,7 @@ class Cluster:
             params["daemons_list"] = ",".join(daemons_list)
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -518,7 +519,7 @@ class Cluster:
             }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -556,7 +557,7 @@ class Cluster:
             }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -594,7 +595,7 @@ class Cluster:
             }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -655,7 +656,7 @@ class Cluster:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -692,7 +693,7 @@ class Cluster:
             }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -729,7 +730,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -766,7 +767,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
         handle_errors(response)
@@ -807,7 +808,7 @@ class Cluster:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

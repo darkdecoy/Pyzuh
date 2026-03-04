@@ -3,10 +3,11 @@ import json
 
 from .errors import handle_errors
 
-class Agents: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Agents:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def delete_agents(self, agents_list: str, status: list, pretty: bool = False, wait_for_complete: bool = False, purge: bool = False, older_than: str = "7d", q: str = "", os_platform: str = "", os_version: str = "", os_name: str = "", manager: str = "", version: str = "", group: str = "", node_name: str = "", name: str = "", ip: str = "", register_ip: str = "") -> dict:
         """
@@ -69,7 +70,7 @@ class Agents:
         }
 
         # Send a delete request to the endpoint with the request body
-        response = requests.delete(endpoint, headers=headers, json=body, params=params)
+        response = requests.delete(endpoint, headers=headers, json=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -144,7 +145,7 @@ class Agents:
         }
 
         # Send a GET request to the endpoint with the query parameters
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -184,7 +185,7 @@ class Agents:
         }
 
         # Send a POST request to the endpoint with the request body
-        response = requests.post(endpoint, headers=headers, json=request_body, params=params)
+        response = requests.post(endpoint, headers=headers, json=request_body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -221,7 +222,7 @@ class Agents:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -261,7 +262,7 @@ class Agents:
             params["groups_list"] = ",".join(groups_list)
 
         # Send a Delete request to the API
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -298,7 +299,7 @@ class Agents:
         }
 
         # Send a DELETE request to the API
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -337,7 +338,7 @@ class Agents:
         }
 
         # Send a PUT request to the API
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -373,7 +374,7 @@ class Agents:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -409,7 +410,7 @@ class Agents:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -445,7 +446,7 @@ class Agents:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -482,7 +483,7 @@ class Agents:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -551,7 +552,7 @@ class Agents:
         }
 
         # Send a PUT request to the API
-        response = requests.put(endpoint, params=params, headers=headers)
+        response = requests.put(endpoint, params=params, headers=headers, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -607,7 +608,7 @@ class Agents:
 
 
         # Send a POST request
-        response = requests.post(endpoint, params=params, headers=headers)
+        response = requests.post(endpoint, params=params, headers=headers, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -676,7 +677,7 @@ class Agents:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a get request
-        response = requests.get(endpoint, params=params, headers=headers)
+        response = requests.get(endpoint, params=params, headers=headers, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -712,7 +713,7 @@ class Agents:
         }
 
         # Send a put request to the endpoint
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
     
         # Handle errors in the response
         handle_errors(response)
@@ -760,7 +761,7 @@ class Agents:
             params["ip"] = agent_ip
 
         # Send a POST request to the API
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -797,7 +798,7 @@ class Agents:
         }
 
         # Send a POST request to the API
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -850,7 +851,7 @@ class Agents:
             params['q'] = q
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -886,7 +887,7 @@ class Agents:
         }
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
     
         # Handle errors in the response
         handle_errors(response)
@@ -931,7 +932,7 @@ class Agents:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -968,7 +969,7 @@ class Agents:
         }
 
         # Send a PUT request to the endpoint
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -1005,7 +1006,7 @@ class Agents:
         }
 
         # Send a PUT request to the endpoint
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -1052,7 +1053,7 @@ class Agents:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -1085,7 +1086,7 @@ class Agents:
         "pretty": str(pretty).lower(),
         "wait_for_complete": str(wait_for_complete).lower()
         }
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -1118,7 +1119,7 @@ class Agents:
         "pretty": str(pretty).lower(),
         "wait_for_complete": str(wait_for_complete).lower()
         }
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

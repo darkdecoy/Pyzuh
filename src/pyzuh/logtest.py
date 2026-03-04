@@ -2,9 +2,10 @@ import requests
 from .errors import handle_errors
 
 class Logtest:
-    def __init__(self, api_url: str, jwt_token: str):
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
 
     def run_logtest(self, token: str, log_format: str, location: str, event: str, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -46,7 +47,7 @@ class Logtest:
         }
 
         # Send a POST request to the endpoint with the request body
-        response = requests.post(endpoint, headers=headers, json=request_body, params=params)
+        response = requests.post(endpoint, headers=headers, json=request_body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -83,7 +84,7 @@ class Logtest:
         }
 
         # Send a DELETE request to the endpoint
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

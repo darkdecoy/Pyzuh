@@ -3,14 +3,15 @@ from .errors import handle_errors
 import jwt 
 
 class Decoders: 
-    def __init__(self, api_url: str, jwt_token: str):
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def list_decoders(self, decoder_names: list = None, pretty: bool = False, wait_for_complete: bool = False, 
-                  offset: int = 0, limit: int = 500, select: list = None, sort: str = None, 
-                  search: str = None, q: str = None, filename: list = None, relative_dirname: str = None, 
-                  status: str = None, distinct: bool = False) -> dict:
+                    offset: int = 0, limit: int = 500, select: list = None, sort: str = None, 
+                    search: str = None, q: str = None, filename: list = None, relative_dirname: str = None, 
+                    status: str = None, distinct: bool = False) -> dict:
         """
         Return information about all decoders included in ossec.conf. This information includes decoder's route, name, file, among others.
 
@@ -62,7 +63,7 @@ class Decoders:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -125,7 +126,7 @@ class Decoders:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -168,7 +169,7 @@ class Decoders:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -212,7 +213,7 @@ class Decoders:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a PUT request to the endpoint with the file content as data
-        response = requests.put(endpoint, headers=headers, params=params, data=file_content)
+        response = requests.put(endpoint, headers=headers, params=params, data=file_content, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -252,7 +253,7 @@ class Decoders:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a DELETE request to the endpoint
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -303,7 +304,7 @@ class Decoders:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

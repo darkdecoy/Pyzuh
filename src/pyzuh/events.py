@@ -1,10 +1,11 @@
 import requests 
 from .errors import handle_errors
 
-class Events: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Events:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def ingest_events(self, events: list, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -34,7 +35,7 @@ class Events:
         }
 
         # Send a POST request to the endpoint with the events as a JSON payload
-        response = requests.post(endpoint, headers=headers, params=params, json={"events": events})
+        response = requests.post(endpoint, headers=headers, params=params, json={"events": events}, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

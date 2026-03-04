@@ -1,17 +1,18 @@
 import requests
 from .errors import handle_errors
 
-class Rules: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Rules:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
         
     def list_rules(self, rule_ids: list[int] = None, pretty: bool = False, wait_for_complete: bool = False,
-               offset: int = 0, limit: int = 500, select: list[str] = None, sort: str = None, search: str = None,
-               q: str = None, status: str = None, group: str = None, level: str = None, filename: list[str] = None,
-               relative_dirname: str = None, pci_dss: str = None, gdpr: str = None, gpg13: str = None,
-               hipaa: str = None, nist_800_53: str = None, tsc: str = None, mitre: str = None,
-               distinct: bool = False) -> dict:
+                offset: int = 0, limit: int = 500, select: list[str] = None, sort: str = None, search: str = None,
+                q: str = None, status: str = None, group: str = None, level: str = None, filename: list[str] = None,
+                relative_dirname: str = None, pci_dss: str = None, gdpr: str = None, gpg13: str = None,
+                hipaa: str = None, nist_800_53: str = None, tsc: str = None, mitre: str = None,
+                distinct: bool = False) -> dict:
         """
         List rules and their information from the Wazuh API.
 
@@ -81,13 +82,13 @@ class Rules:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
     
     def get_groups(self, pretty: bool = False, wait_for_complete: bool = False,
-               offset: int = 0, limit: int = 500, sort: str = None, search: str = None) -> dict:
+                offset: int = 0, limit: int = 500, sort: str = None, search: str = None) -> dict:
         """
         List rules and their information from the Wazuh API.
 
@@ -125,14 +126,14 @@ class Rules:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
 
     def get_requirements(self, requirement: str, pretty: bool = False, wait_for_complete: bool = False, offset: int = 0, limit: int = 500, sort: str = None, search: str = None) -> dict:
         """
-         Send a GET request to retrieve all specified requirement names defined in the Wazuh ruleset.
+        Send a GET request to retrieve all specified requirement names defined in the Wazuh ruleset.
 
         Parameters:
         requirement (str): The specific requirement name to retrieve. Enum: "pci_dss", "gdpr", "hipaa", "nist-800-53", "gpg13", "tsc", "mitre".
@@ -146,7 +147,7 @@ class Rules:
         Returns:
         dict: The API response as a dictionary.
         """
-       # Validate requirement parameter
+        # Validate requirement parameter
         if requirement not in ("pci_dss", "gdpr", "hipaa", "nist-800-53", "gpg13", "tsc", "mitre"):
             raise ValueError("Invalid requirement. Allowed values are: pci_dss, gdpr, hipaa, nist-800-53, gpg13, tsc, mitre")
         
@@ -173,7 +174,7 @@ class Rules:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         response.raise_for_status()
@@ -182,9 +183,9 @@ class Rules:
         return response.json()
     
     def get_files(self, pretty: bool = False, wait_for_complete: bool = False,
-               offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
-               q: str = None, status: str = None, filename: list[str] = None,
-               relative_dirname: str = None, distinct: bool = False) -> dict:
+                offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
+                q: str = None, status: str = None, filename: list[str] = None,
+                relative_dirname: str = None, distinct: bool = False) -> dict:
         """
         Gets Files from the Wazuh API. 
 
@@ -233,7 +234,7 @@ class Rules:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the endpoint
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -273,7 +274,7 @@ class Rules:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         response.raise_for_status()
@@ -316,7 +317,7 @@ class Rules:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a put request
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         response.raise_for_status()
@@ -355,6 +356,6 @@ class Rules:
 
         # Filter out None values from the params dictionary
         params = {k: v for k, v in params.items() if v is not None}
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         response.raise_for_status()
         return response.json()

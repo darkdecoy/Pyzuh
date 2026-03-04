@@ -1,10 +1,11 @@
 import requests
 from .errors import handle_errors
 
-class Rootcheck: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Rootcheck:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def run_scan(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list = None) -> dict:
         """
@@ -38,7 +39,7 @@ class Rootcheck:
             params["agents_list"] = ",".join(agents_list)
 
         # Send a PUT request to the API
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -97,7 +98,7 @@ class Rootcheck:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -138,7 +139,7 @@ class Rootcheck:
         }
 
         # Send a Delete request to the API
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -179,7 +180,7 @@ class Rootcheck:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)

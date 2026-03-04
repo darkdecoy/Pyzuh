@@ -1,10 +1,11 @@
 import requests 
 from .errors import handle_errors
 
-class Security: 
-    def __init__(self, api_url: str, jwt_token: str):
+class Security:
+    def __init__(self, api_url: str, jwt_token: str, ssl_verify: bool = True):
         self.api_url = api_url
         self.jwt_token = jwt_token
+        self.ssl_verify = ssl_verify
     
     def logout_user(self) -> dict:
         """
@@ -23,7 +24,7 @@ class Security:
         }
 
         # Send a DELETE request to the API
-        response = requests.delete(endpoint, headers=headers)
+        response = requests.delete(endpoint, headers=headers, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -48,7 +49,7 @@ class Security:
             "raw":str(raw).lower()
         }
         # Send a post request to the API
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -78,7 +79,7 @@ class Security:
         "pretty": str(pretty).lower(),
         "wait_for_complete": str(wait_for_complete).lower()
         }
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -110,7 +111,7 @@ class Security:
         }
 
         # Send a POST request to the endpoint with the events as a JSON payload
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -134,7 +135,7 @@ class Security:
             "Content-Type": "application/json"
         }
         # Send a delete request to the API
-        response = requests.delete(endpoint, headers=headers)
+        response = requests.delete(endpoint, headers=headers, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -168,7 +169,7 @@ class Security:
         }
 
         # Send a PUT request to the API
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -199,7 +200,7 @@ class Security:
         }
 
         # Send a PUT request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -231,7 +232,7 @@ class Security:
         }
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -282,7 +283,7 @@ class Security:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -322,7 +323,7 @@ class Security:
         }
 
         # Send a POST request to the endpoint with the request body
-        response = requests.post(endpoint, headers=headers, json=request_body, params=params)
+        response = requests.post(endpoint, headers=headers, json=request_body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -363,7 +364,7 @@ class Security:
         }
 
         # Send a delete request to the endpoint with the request body
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -408,7 +409,7 @@ class Security:
         }
 
         # Send a delete request to the endpoint with the request body
-        response = requests.delete(endpoint, headers=headers, body=body, params=params)
+        response = requests.delete(endpoint, headers=headers, body=body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -462,7 +463,7 @@ class Security:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -494,7 +495,7 @@ class Security:
         }
 
         #Post Request
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -526,7 +527,7 @@ class Security:
         }
 
         #Delete Request
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -562,7 +563,7 @@ class Security:
             }
         
         #Put Request
-        response = requests.put(endpoint, headers=headers, body=body, params=params)
+        response = requests.put(endpoint, headers=headers, body=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -613,7 +614,7 @@ class Security:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -653,7 +654,7 @@ class Security:
         }
     
         # Post request
-        response = requests.post(endpoint, headers=headers, json=body, params=params)
+        response = requests.post(endpoint, headers=headers, json=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -688,11 +689,11 @@ class Security:
         "rule_ids": ','.join(rule_ids) if rule_ids else None
         }
         
-         # Remove None values from params
+        # Remove None values from params
         params = {k: v for k, v in params.items() if v is not None}
         
         #Delete request
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -736,7 +737,7 @@ class Security:
         }
 
         # PUT request
-        response = requests.put(endpoint, headers=headers, json=body, params=params)
+        response = requests.put(endpoint, headers=headers, json=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -787,7 +788,7 @@ class Security:
         params = {k: v for k, v in params.items() if v is not None}
 
         # Send a GET request to the API
-        response = requests.get(endpoint, headers=headers, params=params)
+        response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -827,7 +828,7 @@ class Security:
         }
     
         # Post request
-        response = requests.post(endpoint, headers=headers, json=body, params=params)
+        response = requests.post(endpoint, headers=headers, json=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -862,11 +863,11 @@ class Security:
         "policy_ids": ','.join(policy_ids) if policy_ids else None
         }
         
-         # Remove None values from params
+        # Remove None values from params
         params = {k: v for k, v in params.items() if v is not None}
         
         #Delete request
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -910,7 +911,7 @@ class Security:
         }
 
         # PUT request
-        response = requests.put(endpoint, headers=headers, json=body, params=params)
+        response = requests.put(endpoint, headers=headers, json=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -928,7 +929,7 @@ class Security:
         Returns:
         dict: The API response as a dictionary.
         """
-    
+
         # Define the endpoint URL
         endpoint = f"{self.api_url}/security/users/{user_id}/roles"
 
@@ -946,11 +947,11 @@ class Security:
         }
     
         # Post request
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
-    
+
     def remove_roles_from_user(self, user_id: str, role_ids: str, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
         Remove roles from a user.
@@ -964,7 +965,7 @@ class Security:
         Returns:
         dict: The API response as a dictionary.
         """
-    
+
         # Define the endpoint URL
         endpoint = f"{self.api_url}/security/users/{user_id}/roles"
 
@@ -982,7 +983,7 @@ class Security:
         }
     
         # Delete request
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -1000,7 +1001,7 @@ class Security:
         Returns:
         dict: The API response as a dictionary.
         """
-    
+
         # Define the endpoint URL
         endpoint = f"{self.api_url}/security/roles/{role_id}/policies"
 
@@ -1019,11 +1020,11 @@ class Security:
         }
     
         # Post request
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
-    
+
     def remove_policies_from_role(self, role_id: str, policy_ids: str, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
         Remove policies from role.
@@ -1055,7 +1056,7 @@ class Security:
         }
     
         # Delete request
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -1091,7 +1092,7 @@ class Security:
         }
     
         # Post request
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -1127,7 +1128,7 @@ class Security:
         }
     
         #Delete request
-        response = requests.delete(endpoint, headers=headers, params=params)
+        response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -1157,7 +1158,7 @@ class Security:
         "pretty": str(pretty).lower(),
         "wait_for_complete": str(wait_for_complete).lower()
         }
-        response = requests.post(endpoint, headers=headers, params=params)
+        response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
@@ -1204,7 +1205,7 @@ class Security:
         }
 
         # PUT request
-        response = requests.put(endpoint, headers=headers, json=body, params=params)
+        response = requests.put(endpoint, headers=headers, json=body, params=params, verify=self.ssl_verify)
 
         # Parse and return the JSON response
         return response.json()
@@ -1234,7 +1235,7 @@ class Security:
         "pretty": str(pretty).lower(),
         "wait_for_complete": str(wait_for_complete).lower()
         }
-        response = requests.put(endpoint, headers=headers, params=params)
+        response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
         handle_errors(response)
