@@ -1,4 +1,4 @@
-from pyzuh import Agents
+from pyzuh import Agents,authenticate_wazuh
 import requests
 import json
 
@@ -18,11 +18,22 @@ def run_scan_and_post_to_slack(wazuh_client, slack_webhook_url):
     requests.post(slack_webhook_url, json=slack_message)
 
 if __name__ == "__main__":
-    # Initialize the Wazuh client
-    wazuh_client = Agents(api_url='your-wazuh-api-url', jwt_token='your-wazuh-jwt-token')
+    api_url = "https://x.x.x.x:55000"
+    os.environ["WAZUH_USERNAME"] = "wazuh"
+    os.environ["WAZUH_PASSWORD"] = "wazuh"
 
     # Define your Slack webhook URL
     slack_webhook_url = 'your-slack-webhook-url'
+
+    try:
+        # Authenticate with Wazuh API
+        token = authenticate_wazuh(api_url)
+        print("Authentication successful.")
+    except Exception as e:
+        print("Authentication failed:", e)
+
+    # Initialize the Wazuh client
+    wazuh_client = Agents(api_url=api_url, jwt_token=token)
 
     # Run system scan and post results to Slack
     run_scan_and_post_to_slack(wazuh_client, slack_webhook_url)

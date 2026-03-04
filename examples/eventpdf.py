@@ -1,12 +1,20 @@
 import pyzuh
-from pyzuh import events
+from pyzuh import events,authenticate_wazuh
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
-# Define your API URL and JWT token
+# Define your API URL and Credentials
 api_url = "https://your-api-url.com"
-jwt_token = "your-jwt-token"
+os.environ["WAZUH_USERNAME"] = "wazuh"
+os.environ["WAZUH_PASSWORD"] = "wazuh"
+
+try:
+    # Authenticate with Wazuh API
+    jwt_token = authenticate_wazuh(api_url)
+    print("Authentication successful.")
+except Exception as e:
+    print("Authentication failed:", e)
 
 # Create an instance of your class
 client = pyzuh.YourClassName(api_url, jwt_token)
