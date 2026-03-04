@@ -75,7 +75,7 @@ class Ciscat:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return JSON response
         return response.json()

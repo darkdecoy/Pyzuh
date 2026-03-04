@@ -39,7 +39,7 @@ class Experimental:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -76,15 +76,15 @@ class Experimental:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
 
     def get_agents_ciscat_results(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list = None, offset: int = 0, limit: int = 500,
-                             sort: str = None, search: str = None, select: list = None, benchmark: str = None, profile: str = None,
-                             pass_checks: int = 0, fail_checks: int = 0, error_checks: int = 0, notchecked_checks: int = 0,
-                             unknown_results: int = 0, score: int = 0) -> dict:
+                                sort: str = None, search: str = None, select: list = None, benchmark: str = None, profile: str = None,
+                                pass_checks: int = 0, fail_checks: int = 0, error_checks: int = 0, notchecked_checks: int = 0,
+                                unknown_results: int = 0, score: int = 0) -> dict:
         """
         Retrieve CIS-CAT results for all agents or a list of specified agents.
 
@@ -145,14 +145,14 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
     
     def get_agent_hardware(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list = None, offset: int = 0, limit: int = 500,
-                       sort: str = None, search: str = None, select: list = None, ram_free: int = 0, ram_total: int = 0, cpu_cores: int = 1,
-                       cpu_mhz: float = 1, cpu_name: str = None, board_serial: str = None) -> dict:
+                        sort: str = None, search: str = None, select: list = None, ram_free: int = 0, ram_total: int = 0, cpu_cores: int = 1,
+                        cpu_mhz: float = 1, cpu_name: str = None, board_serial: str = None) -> dict:
         """
         Retrieve hardware information for all agents or a list of specified agents.
 
@@ -209,7 +209,7 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -289,13 +289,13 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
     
     def get_agents_netaddr(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list = None, offset: int = 0, limit: int = 500,
-                       sort: str = None, select: str = None, search: str = None, proto: str = None, address: str = None, broadcast: str = None, netmask: str = None) -> dict:
+                        sort: str = None, select: str = None, search: str = None, proto: str = None, address: str = None, broadcast: str = None, netmask: str = None) -> dict:
         """
         Retrieve hardware information for all agents or a list of specified agents.
 
@@ -347,7 +347,7 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -408,15 +408,15 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
     
     def get_agents_os(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list[str] = None,
-                  offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
-                  select: list[str] = None, os_name: str = None, architecture: str = None,
-                  os_version: str = None, version: str = None, release: str = None) -> dict:
+                    offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
+                    select: list[str] = None, os_name: str = None, architecture: str = None,
+                    os_version: str = None, version: str = None, release: str = None) -> dict:
         """
         Get OS information of agents from the Wazuh API.
 
@@ -471,7 +471,7 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        self.handle_errors(response)
+        self.handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -501,7 +501,7 @@ class Experimental:
 
         Returns:
         - Dict[str, Union[dict, list]]: A dictionary containing the packages information of agents.
-         """
+        """
         # Define the endpoint URL
         endpoint = f"{self.api_url}/experimental/syscollector/packages"
 
@@ -509,7 +509,7 @@ class Experimental:
         headers = {
         "Authorization": f"Bearer {self.jwt_token}",
         "Content-Type": "application/json"
-         }
+        }
 
         # Prepare the query parameters
         params = {
@@ -535,16 +535,16 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
 
     def get_agents_ports(self, pretty: bool = False, wait_for_complete: bool = False, agents_list: list[str] = None,
-                     offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
-                     select: list[str] = None, pid: str = None, protocol: str = None,
-                     local_ip: str = None, local_port: str = None, remote_ip: str = None,
-                     tx_queue: str = None, state: str = None, process: str = None) -> dict:
+                    offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
+                    select: list[str] = None, pid: str = None, protocol: str = None,
+                    local_ip: str = None, local_port: str = None, remote_ip: str = None,
+                    tx_queue: str = None, state: str = None, process: str = None) -> dict:
         """
         Return all agents (or a list of them) ports information. This includes details such as local IP, remote IP,
         protocol information, and other data.
@@ -606,7 +606,7 @@ class Experimental:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()

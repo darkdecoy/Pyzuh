@@ -36,7 +36,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -70,7 +70,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -116,7 +116,7 @@ class Manager:
 
         except requests.RequestException as e:
             # Handle request errors (e.g., network issues, authentication errors)
-            handle_errors(response)  # Use handle_errors function to manage the error
+            handle_errors(self=self, response=response)  # Use handle_errors function to manage the error
             raise  # Reraise the exception to alert the caller
         
     def update_config(self, pretty: bool = False, wait_for_complete: bool = False) -> dict: 
@@ -130,7 +130,7 @@ class Manager:
         Returns:
         dict: A dictionary containing the content of the specified configuration section.
         """
-       
+
         #Declare endpoint for interaction
         endpoint = f"{self.api_url}/manager/configuration"
         
@@ -138,7 +138,7 @@ class Manager:
         headers = {
             "Authorization": f"Bearer {self.jwt_token}",
             "Content-Type": "application/octet-stream"
-         }
+        }
 
         #Define Params 
         params = { 
@@ -150,7 +150,7 @@ class Manager:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         #Error Handling, calls function
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Return the response
         return response.json
@@ -188,7 +188,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -225,7 +225,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -261,7 +261,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -297,7 +297,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -350,7 +350,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -385,7 +385,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
     def get_api_config(self, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -417,7 +417,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
     def restart_manager(self, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -449,7 +449,7 @@ class Manager:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
     def check_config(self, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -481,7 +481,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
     def get_active_config(self, component: str, configuration: str, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -515,7 +515,7 @@ class Manager:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()

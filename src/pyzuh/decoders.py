@@ -66,15 +66,15 @@ class Decoders:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
     
     def get_files(self, decoder_names: list = None, pretty: bool = False, wait_for_complete: bool = False, 
-                  offset: int = 0, limit: int = 500, select: list = None, sort: str = None, 
-                  search: str = None, q: str = None, filename: list = None, relative_dirname: str = None, 
-                  status: str = None, distinct: bool = False) -> dict:
+                    offset: int = 0, limit: int = 500, select: list = None, sort: str = None, 
+                    search: str = None, q: str = None, filename: list = None, relative_dirname: str = None, 
+                    status: str = None, distinct: bool = False) -> dict:
         """
         Return information about all decoders included in ossec.conf. This information includes decoder's route, name, file, among others.
 
@@ -129,7 +129,7 @@ class Decoders:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -172,7 +172,7 @@ class Decoders:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -216,7 +216,7 @@ class Decoders:
         response = requests.put(endpoint, headers=headers, params=params, data=file_content, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -256,7 +256,7 @@ class Decoders:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -307,7 +307,7 @@ class Decoders:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()

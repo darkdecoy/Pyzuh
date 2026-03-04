@@ -27,8 +27,8 @@ def handle_errors(self, response):
 
         # Construct an informative error message
         error_message = (f"Permission denied: {title}. Detail: {detail}. "
-                     f"Code: {code}. Remediation: {remediation}. "
-                     f"DAPI Errors: {dapi_errors}.")
+                    f"Code: {code}. Remediation: {remediation}. "
+                    f"DAPI Errors: {dapi_errors}.")
 
         # Raise a PermissionError with the constructed error message
         raise PermissionError(error_message)

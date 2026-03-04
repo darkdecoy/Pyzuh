@@ -59,7 +59,7 @@ class Lists:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -100,7 +100,7 @@ class Lists:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -141,7 +141,7 @@ class Lists:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -181,7 +181,7 @@ class Lists:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -232,7 +232,7 @@ class Lists:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()

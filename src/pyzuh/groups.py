@@ -38,14 +38,14 @@ class Groups:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
 
     def get_groups(self, pretty: bool = False, wait_for_complete: bool = False, groups_list: list = None,
-               offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
-               hash_algorithm: str = None, q: str = None, select: list = None, distinct: bool = False) -> dict:
+                offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
+                hash_algorithm: str = None, q: str = None, select: list = None, distinct: bool = False) -> dict:
         """
         Retrieve information about all groups or a list of them. Returns a list containing basic information
         about each group, such as the number of agents belonging to the group and the checksums of the configuration
@@ -55,12 +55,12 @@ class Groups:
         pretty (bool, optional): Whether to return the response in a human-readable format. Defaults to False.
         wait_for_complete (bool, optional): Whether to disable timeout response. Defaults to False.
         groups_list (list, optional): List of group IDs to filter results by. All groups selected by default
-                                      if not specified. Defaults to None.
+                                    if not specified. Defaults to None.
         offset (int, optional): The first element to return in the collection. Must be >= 0. Defaults to 0.
         limit (int, optional): The maximum number of elements to return. Defaults to 500. Up to 100,000 can be specified,
-                              but it is recommended not to exceed 500 elements for optimal response time.
+                            but it is recommended not to exceed 500 elements for optimal response time.
         sort (str, optional): Criteria for sorting the results. Use +/- at the beginning to specify ascending/descending order.
-                             Use '.' for nested fields. Defaults to None.
+                            Use '.' for nested fields. Defaults to None.
         search (str, optional): Search string to filter results by. Use '-' at the beginning for complementary search. Defaults to None.
         hash_algorithm (str, optional): Hash algorithm to generate the returned checksums. Options include "md5", "sha1",
                                         "sha224", "sha256", "sha384", "sha512", "blake2b", "blake2s", "sha3_224", "sha3_256",
@@ -103,7 +103,7 @@ class Groups:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -146,7 +146,7 @@ class Groups:
         response = requests.post(endpoint, headers=headers, params=params, json=body, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -204,7 +204,7 @@ class Groups:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -250,7 +250,7 @@ class Groups:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -289,14 +289,14 @@ class Groups:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
     
     def get_group_files(self, group_id: str, pretty: bool = False, wait_for_complete: bool = False,
-               offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
-               hash_algorithm: str = None, q: str = None, select: list = None, distinct: bool = False) -> dict:
+                offset: int = 0, limit: int = 500, sort: str = None, search: str = None,
+                hash_algorithm: str = None, q: str = None, select: list = None, distinct: bool = False) -> dict:
         """
         Return the list of agents that belong to the specified group.
         Parameters:
@@ -304,12 +304,12 @@ class Groups:
         pretty (bool, optional): Whether to return the response in a human-readable format. Defaults to False.
         wait_for_complete (bool, optional): Whether to disable timeout response. Defaults to False.
         groups_list (list, optional): List of group IDs to filter results by. All groups selected by default
-                                      if not specified. Defaults to None.
+                                    if not specified. Defaults to None.
         offset (int, optional): The first element to return in the collection. Must be >= 0. Defaults to 0.
         limit (int, optional): The maximum number of elements to return. Defaults to 500. Up to 100,000 can be specified,
-                              but it is recommended not to exceed 500 elements for optimal response time.
+                            but it is recommended not to exceed 500 elements for optimal response time.
         sort (str, optional): Criteria for sorting the results. Use +/- at the beginning to specify ascending/descending order.
-                             Use '.' for nested fields. Defaults to None.
+                            Use '.' for nested fields. Defaults to None.
         search (str, optional): Search string to filter results by. Use '-' at the beginning for complementary search. Defaults to None.
         hash_algorithm (str, optional): Hash algorithm to generate the returned checksums. Options include "md5", "sha1",
                                         "sha224", "sha256", "sha384", "sha512", "blake2b", "blake2s", "sha3_224", "sha3_256",
@@ -351,7 +351,7 @@ class Groups:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -392,7 +392,7 @@ class Groups:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
     def get_group_file_json(self, group_id: str, file_name: str, file_type: str, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
@@ -430,7 +430,7 @@ class Groups:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()

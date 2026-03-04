@@ -37,4 +37,4 @@ class Overview:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)

@@ -37,15 +37,15 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
     
     def get_nodes_info(self, pretty: bool = False, wait_for_complete: bool = False, offset: int = 0, 
-                      limit: int = 500, select: list = None, sort: str = None, search: str = None, 
-                      relative_dirname: str = None, filename: list = None, q: str = None, distinct: bool = False, 
-                      nodes_list: list = None) -> dict:
+                    limit: int = 500, select: list = None, sort: str = None, search: str = None, 
+                    relative_dirname: str = None, filename: list = None, q: str = None, distinct: bool = False, 
+                    nodes_list: list = None) -> dict:
         """
         Retrieve information about cluster nodes based on specified filters.
 
@@ -98,7 +98,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -135,7 +135,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -172,7 +172,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -207,7 +207,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -242,7 +242,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -259,7 +259,7 @@ class Cluster:
         Returns:
             dict: The response containing information about the sync status of specific nodes.
         """
-         # Define the endpoint URL
+        # Define the endpoint URL
         endpoint = f"{self.api_url}/cluster/api/config"
 
         # Create headers
@@ -279,7 +279,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -315,7 +315,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -351,7 +351,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -404,7 +404,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -441,7 +441,7 @@ class Cluster:
         response = requests.put(endpoint, headers=headers, params=params, data=config_data, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -483,7 +483,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -522,7 +522,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         #Return the JSON response
         return response.json()
@@ -560,7 +560,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         #Return the JSON response
         return response.json()
@@ -598,13 +598,13 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         #Return the JSON response
         return response.json()
     def get_node_logs(self, node_id: str, pretty: bool = False, wait_for_complete: bool = False, offset: int = 0, 
-                  limit: int = 500, sort: str = None, search: str = None, tag: str = None, 
-                  level: str = None, q: str = None, select: list = None, distinct: bool = False) -> dict:
+                    limit: int = 500, sort: str = None, search: str = None, tag: str = None, 
+                    level: str = None, q: str = None, select: list = None, distinct: bool = False) -> dict:
         """
         Retrieve the last 2000 Wazuh log entries in the specified node.
 
@@ -659,7 +659,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -696,7 +696,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         #Return the JSON response
         return response.json()
@@ -733,7 +733,7 @@ class Cluster:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -770,7 +770,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -811,7 +811,7 @@ class Cluster:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()

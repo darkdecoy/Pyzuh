@@ -53,7 +53,7 @@ class Mitre:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -88,7 +88,7 @@ class Mitre:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
     def get_mitre_mitigations(self, mitigation_ids: list[str] = None, pretty: bool = False, wait_for_complete: bool = False, offset: int = 0, limit: int = 500, sort: str = None, search: str = None, select: list[str] = None, q: str = None, distinct: bool = False) -> dict:
         """
@@ -109,7 +109,7 @@ class Mitre:
         Returns:
         dict: A dictionary containing the response with MITRE groups.
         """
-     # Define the endpoint URL
+        # Define the endpoint URL
         endpoint = f"{self.api_url}/mitre/mitigations"
 
         # Create headers
@@ -136,7 +136,7 @@ class Mitre:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -160,7 +160,7 @@ class Mitre:
         Returns:
         dict: A dictionary containing the response with MITRE groups.
         """
-     # Define the endpoint URL
+        # Define the endpoint URL
         endpoint = f"{self.api_url}/mitre/groups"
 
         # Create headers
@@ -187,7 +187,7 @@ class Mitre:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -211,7 +211,7 @@ class Mitre:
         Returns:
         dict: A dictionary containing the response with MITRE groups.
         """
-     # Define the endpoint URL
+        # Define the endpoint URL
         endpoint = f"{self.api_url}/mitre/software"
 
         # Create headers
@@ -238,7 +238,7 @@ class Mitre:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -262,7 +262,7 @@ class Mitre:
         Returns:
         dict: A dictionary containing the response with MITRE groups.
         """
-     # Define the endpoint URL
+        # Define the endpoint URL
         endpoint = f"{self.api_url}/mitre/tactics"
 
         # Create headers
@@ -289,7 +289,7 @@ class Mitre:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()
@@ -313,7 +313,7 @@ class Mitre:
         Returns:
         dict: A dictionary containing the response with MITRE groups.
         """
-     # Define the endpoint URL
+        # Define the endpoint URL
         endpoint = f"{self.api_url}/mitre/techniques"
 
         # Create headers
@@ -340,7 +340,7 @@ class Mitre:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
         
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
         
         # Parse and return the JSON response
         return response.json()

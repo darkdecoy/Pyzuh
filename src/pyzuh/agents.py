@@ -206,7 +206,7 @@ class Agents:
         response = requests.post(endpoint, headers=headers, json=request_body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -215,7 +215,7 @@ class Agents:
         """
         Return the active configuration the agent is currently using.
 
-         Parameters:
+        Parameters:
         - agent_id (str): Agent ID. Must be at least 3 characters long.
         - component (str): Selected agent's component. Options: "agent", "agentless", "analysis", "auth", "com", "csyslog", "integrator", "logcollector", "mail", "monitor", "request", "syscheck", "wazuh-db", "wmodules".
         - configuration (str): Selected agent's configuration to read. The configuration to read depends on the selected component.
@@ -243,7 +243,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -283,7 +283,7 @@ class Agents:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -320,7 +320,7 @@ class Agents:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -359,7 +359,7 @@ class Agents:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -395,7 +395,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -431,7 +431,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -467,7 +467,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -504,7 +504,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -573,7 +573,7 @@ class Agents:
         response = requests.put(endpoint, params=params, headers=headers, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -583,26 +583,26 @@ class Agents:
         Upgrade agents using a local WPK file.
 
         Parameters:
-      - agents_list (list[str]): Required. List of agent IDs (separated by comma) or the keyword "all" to select all agents.
-      - file_path (str): Required. Full path to the local WPK file on the Wazuh server (default installation directory: /var/ossec).
-      - wait_for_complete (bool, optional): Default: False. Disable timeout response. Highly recommended when upgrading more than 3000 agents simultaneously.
-      - pretty (bool, optional): Default: False. Show results in human-readable format.
-      - **kwargs (optional): Additional filter parameters:
-          - q (str): Query to filter results by. For example q="status=active".
-          - os (dict, optional): Filter by operating system details:
-              - platform (str): Filter by OS platform.
-              - version (str): Filter by OS version.
-              - name (str): Filter by OS name.
-          - manager (str): Filter by manager hostname where agents are connected to.
-          - version (str): Filter by agents version using one of the following formats: 'X.Y.Z', 'vX.Y.Z', 'wazuh X.Y.Z', or 'wazuh vX.Y.Z'. For example: '4.4.0'.
-          - group (str): Filter by group of agents.
-          - node_name (str): Filter by node name.
-          - name (str): Filter by name.
-          - ip (str): Filter by the IP used by the agent to communicate with the manager. If not available, it will have the same value as registerIP.
-          - registerIP (str): Filter by the IP used when registering the agent.
+        - agents_list (list[str]): Required. List of agent IDs (separated by comma) or the keyword "all" to select all agents.
+        - file_path (str): Required. Full path to the local WPK file on the Wazuh server (default installation directory: /var/ossec).
+        - wait_for_complete (bool, optional): Default: False. Disable timeout response. Highly recommended when upgrading more than 3000 agents simultaneously.
+        - pretty (bool, optional): Default: False. Show results in human-readable format.
+        - **kwargs (optional): Additional filter parameters:
+            - q (str): Query to filter results by. For example q="status=active".
+            - os (dict, optional): Filter by operating system details:
+                - platform (str): Filter by OS platform.
+                - version (str): Filter by OS version.
+                - name (str): Filter by OS name.
+            - manager (str): Filter by manager hostname where agents are connected to.
+            - version (str): Filter by agents version using one of the following formats: 'X.Y.Z', 'vX.Y.Z', 'wazuh X.Y.Z', or 'wazuh vX.Y.Z'. For example: '4.4.0'.
+            - group (str): Filter by group of agents.
+            - node_name (str): Filter by node name.
+            - name (str): Filter by name.
+            - ip (str): Filter by the IP used by the agent to communicate with the manager. If not available, it will have the same value as registerIP.
+            - registerIP (str): Filter by the IP used when registering the agent.
 
         Returns:
-      dict: The API response as a dictionary.
+        dict: The API response as a dictionary.
         """
         # Define the endpoint URL (might be different for WPK upgrade)
         endpoint = f"{self.api_url}/agents/upgrade_custom"  
@@ -615,10 +615,10 @@ class Agents:
 
         #Param
         params = {
-      "agents_list": agents_list,
-      "file_path": file_path,
-      "pretty": pretty,
-      "wait_for_complete": wait_for_complete
+            "agents_list": agents_list,
+            "file_path": file_path,
+            "pretty": pretty,
+            "wait_for_complete": wait_for_complete
         }
 
         # Filter out parameters with None values
@@ -629,7 +629,7 @@ class Agents:
         response = requests.post(endpoint, params=params, headers=headers, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -641,25 +641,25 @@ class Agents:
         Get the results of a previous agent upgrade.
 
         Parameters:
-      - agents_list (list[str], optional): List of agent IDs (separated by comma) to retrieve results for. Defaults to all agents.
-      - pretty (bool, optional): Default: False. Show results in human-readable format.
-      - wait_for_complete (bool, optional): Default: False. Disable timeout response.
-      - **kwargs (optional): Additional filter parameters:
-          - q (str): Query to filter results by. For example q="status=active".
-          - os (dict, optional): Filter by operating system details:
-              - platform (str): Filter by OS platform.
-              - version (str): Filter by OS version.
-              - name (str): Filter by OS name.
-          - manager (str): Filter by manager hostname where agents are connected to.
-          - version (str): Filter by agents version using one of the following formats: 'X.Y.Z', 'vX.Y.Z', 'wazuh X.Y.Z', or 'wazuh vX.Y.Z'. For example: '4.4.0'.
-          - group (str): Filter by group of agents.
-          - node_name (str): Filter by node name.
-          - name (str): Filter by name.
-          - ip (str): Filter by the IP used by the agent to communicate with the manager. If not available, it will have the same value as registerIP.
-          - registerIP (str): Filter by the IP used when registering the agent.
+        - agents_list (list[str], optional): List of agent IDs (separated by comma) to retrieve results for. Defaults to all agents.
+        - pretty (bool, optional): Default: False. Show results in human-readable format.
+        - wait_for_complete (bool, optional): Default: False. Disable timeout response.
+        - **kwargs (optional): Additional filter parameters:
+            - q (str): Query to filter results by. For example q="status=active".
+            - os (dict, optional): Filter by operating system details:
+                - platform (str): Filter by OS platform.
+                - version (str): Filter by OS version.
+                - name (str): Filter by OS name.
+            - manager (str): Filter by manager hostname where agents are connected to.
+            - version (str): Filter by agents version using one of the following formats: 'X.Y.Z', 'vX.Y.Z', 'wazuh X.Y.Z', or 'wazuh vX.Y.Z'. For example: '4.4.0'.
+            - group (str): Filter by group of agents.
+            - node_name (str): Filter by node name.
+            - name (str): Filter by name.
+            - ip (str): Filter by the IP used by the agent to communicate with the manager. If not available, it will have the same value as registerIP.
+            - registerIP (str): Filter by the IP used when registering the agent.
 
         Returns:
-      dict: The API response as a dictionary containing the upgrade results.
+        dict: The API response as a dictionary containing the upgrade results.
         """
 
         # Define the endpoint URL
@@ -698,7 +698,7 @@ class Agents:
         response = requests.get(endpoint, params=params, headers=headers, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -734,7 +734,7 @@ class Agents:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
     
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -782,7 +782,7 @@ class Agents:
         response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -819,7 +819,7 @@ class Agents:
         response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -872,7 +872,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -908,7 +908,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
     
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
     
         # Parse and return the JSON response
         return response.json()
@@ -953,7 +953,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -990,7 +990,7 @@ class Agents:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -1027,7 +1027,7 @@ class Agents:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -1074,7 +1074,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -1107,7 +1107,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -1140,7 +1140,7 @@ class Agents:
         response = requests.get(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()

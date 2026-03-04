@@ -82,7 +82,7 @@ class Security:
         response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -114,7 +114,7 @@ class Security:
         response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -326,7 +326,7 @@ class Security:
         response = requests.post(endpoint, headers=headers, json=request_body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -344,7 +344,7 @@ class Security:
         dict: The API response as a dictionary.
         """
         
-         # Ensure user_ids is not empty
+        # Ensure user_ids is not empty
         if not user_ids:
             raise ValueError("user_ids cannot be empty")
     
@@ -367,7 +367,7 @@ class Security:
         response = requests.delete(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -385,10 +385,10 @@ class Security:
         dict: The API response as a dictionary.
         """
         
-         # Ensure user_ids is not empty
+        # Ensure user_ids is not empty
         if not user_id:
             raise ValueError("user_ids cannot be empty")
-    
+
         # Define the endpoint URL
         endpoint = f"{self.api_url}/security/users/{user_id}"
 
@@ -412,7 +412,7 @@ class Security:
         response = requests.delete(endpoint, headers=headers, body=body, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
@@ -1161,11 +1161,11 @@ class Security:
         response = requests.post(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
-    
+
     def update_security_config(self, auth_token_exp_timeout: int, rbac_mode: str, pretty: bool = False, wait_for_complete: bool = False) -> dict:
         """
         Update the security configuration with the provided data.
@@ -1238,7 +1238,7 @@ class Security:
         response = requests.put(endpoint, headers=headers, params=params, verify=self.ssl_verify)
 
         # Handle errors in the response
-        handle_errors(response)
+        handle_errors(self=self, response=response)
 
         # Parse and return the JSON response
         return response.json()
